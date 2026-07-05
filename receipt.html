@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt · AA Jino EV</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    body { background: #f8f9fa; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .receipt-wrapper {
+      max-width: 380px;
+      width: 100%;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      padding: 25px 20px;
+      margin: 0 auto;
+    }
+    .receipt {
+      background: #fff;
+      padding: 10px 0;
+      font-size: 0.9rem;
+    }
+    .receipt-header {
+      text-align: center;
+      border-bottom: 2px dashed #dee2e6;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+    .receipt-header .logo { font-size: 2.5rem; color: #28a745; }
+    .receipt-header h5 { font-weight: 700; color: #1e3c5c; margin: 5px 0; }
+    .receipt-header .address { font-size: 0.8rem; color: #6c757d; }
+    .receipt-body .row-data { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px dotted #eee; }
+    .receipt-body .row-data.total { font-weight: 700; font-size: 1.1rem; border-bottom: 2px solid #28a745; padding: 8px 0; }
+    .receipt-footer { text-align: center; margin-top: 20px; border-top: 2px dashed #dee2e6; padding-top: 15px; font-size: 0.8rem; color: #6c757d; }
+    .qr-placeholder { width: 70px; height: 70px; background: #e9ecef; margin: 10px auto; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 0.7rem; color: #6c757d; }
+    .btn-print { background: #28a745; border: none; color: #fff; font-weight: 600; }
+    .btn-print:hover { background: #218838; }
+    .btn-back { background: #6c757d; border: none; color: #fff; }
+    .btn-back:hover { background: #5a6268; }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .receipt-wrapper { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="receipt-wrapper">
+  <div class="receipt" id="receiptContent">
+    <div class="receipt-header">
+      <div class="logo"><i class="fas fa-charging-station"></i></div>
+      <h5>AA Jino EV Charging Station</h5>
+      <div class="address">No. ___, Katsina, Nigeria</div>
+      <div class="address">+234 7040023190</div>
+    </div>
+    <div class="receipt-body" id="receiptBody">
+      <!-- Dynamic data -->
+    </div>
+    <div class="receipt-footer">
+      <div class="qr-placeholder"><i class="fas fa-qrcode fa-2x"></i></div>
+      <p>Thank you for charging with<br><strong>AA Jino EV Charging Station</strong><br>Safe Journey!</p>
+    </div>
+  </div>
+  <div class="d-flex gap-2 mt-3 no-print">
+    <button class="btn btn-print w-50" onclick="window.print()"><i class="fas fa-print me-1"></i> Print</button>
+    <button class="btn btn-back w-50" onclick="window.close()"><i class="fas fa-arrow-left me-1"></i> Back</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const dataStr = sessionStorage.getItem('receiptData');
+    if (!dataStr) {
+      document.getElementById('receiptBody').innerHTML = '<p class="text-danger">No receipt data found.</p>';
+      return;
+    }
+    const data = JSON.parse(dataStr);
+    const start = new Date(data.startTime).toLocaleString();
+    const stop = new Date(data.stopTime).toLocaleString();
+    const duration = data.duration;
+    const hrs = Math.floor(duration / 3600);
+    const mins = Math.floor((duration % 3600) / 60);
+    const secs = Math.floor(duration % 60);
+    const durStr = `${hrs}h ${mins}m ${secs}s`;
+
+    document.getElementById('receiptBody').innerHTML = `
+      <div class="row-data"><span>Receipt #</span><span>${data.receiptNo}</span></div>
+      <div class="row-data"><span>Date</span><span>${new Date().toLocaleDateString()}</span></div>
+      <div class="row-data"><span>Operator</span><span>${data.operator}</span></div>
+      <div class="row-data"><span>Port</span><span>${data.port}</span></div>
+      <div class="row-data"><span>Start Time</span><span>${start}</span></div>
+      <div class="row-data"><span>Stop Time</span><span>${stop}</span></div>
+      <div class="row-data"><span>Duration</span><span>${durStr}</span></div>
+      <div class="row-data"><span>Energy Consumed</span><span>${data.energy.toFixed(3)} kWh</span></div>
+      <div class="row-data"><span>Price per kWh</span><span>₦${data.pricePerKwh}</span></div>
+      <div class="row-data total"><span>Total Amount</span><span>₦${data.amount.toFixed(2)}</span></div>
+      <div class="row-data"><span>Payment Status</span><span class="text-success fw-bold">Paid</span></div>
+    `;
+  });
+</script>
+</body>
+</html>

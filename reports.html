@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports · AA Jino EV</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* same common styles as before, copy minimal */
+    * { font-family: 'Poppins', sans-serif; }
+    body { background: #f4f7fc; }
+    .wrapper { display: flex; width: 100%; }
+    .sidebar { width: 260px; min-height: 100vh; background: #1e3c5c; color: #fff; transition: 0.3s; position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 1000; }
+    .sidebar .brand { padding: 20px 15px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: center; font-weight: 700; font-size: 1.2rem; }
+    .sidebar .brand i { color: #28a745; margin-right: 10px; }
+    .sidebar .nav-link { color: rgba(255,255,255,0.7); padding: 12px 20px; border-radius: 8px; margin: 4px 10px; transition: 0.3s; }
+    .sidebar .nav-link:hover, .sidebar .nav-link.active { background: rgba(40,167,69,0.2); color: #fff; }
+    .sidebar .nav-link i { width: 24px; margin-right: 10px; }
+    .main-content { flex: 1; padding: 20px; }
+    .topbar { background: #fff; padding: 15px 25px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
+    .topbar h4 { margin: 0; font-weight: 600; color: #1e3c5c; }
+    .footer { text-align: center; padding: 20px 0 10px; color: #6c757d; font-size: 0.9rem; border-top: 1px solid #dee2e6; margin-top: 30px; }
+    .stat-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); transition: 0.3s; }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+    .stat-card .icon { font-size: 2rem; color: #28a745; }
+    .stat-card .number { font-size: 1.8rem; font-weight: 700; color: #1e3c5c; }
+    .stat-card .label { color: #6c757d; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <nav class="sidebar">
+    <div class="brand"><i class="fas fa-charging-station"></i> AA Jino EV</div>
+    <div class="nav flex-column">
+      <a href="dashboard.html" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="history.html" class="nav-link"><i class="fas fa-history"></i> Charging History</a>
+      <a href="reports.html" class="nav-link active"><i class="fas fa-chart-bar"></i> Reports</a>
+      <a href="users.html" class="nav-link"><i class="fas fa-users"></i> Users</a>
+      <a href="ports.html" class="nav-link"><i class="fas fa-plug"></i> Charging Ports</a>
+      <a href="settings.html" class="nav-link"><i class="fas fa-cog"></i> Settings</a>
+      <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+      <a href="login.html" class="nav-link text-danger" onclick="sessionStorage.removeItem('loggedIn')"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </nav>
+  <div class="main-content">
+    <div class="topbar">
+      <h4><i class="fas fa-chart-bar me-2 text-success"></i>Reports</h4>
+      <span><i class="fas fa-user-circle me-1"></i> Jino</span>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-3 col-6"><div class="stat-card"><i class="fas fa-money-bill-wave icon"></i><div class="number" id="todayRevenue">₦0</div><div class="label">Today's Revenue</div></div></div>
+      <div class="col-md-3 col-6"><div class="stat-card"><i class="fas fa-calendar-alt icon"></i><div class="number" id="monthRevenue">₦0</div><div class="label">Monthly Revenue</div></div></div>
+      <div class="col-md-3 col-6"><div class="stat-card"><i class="fas fa-bolt icon"></i><div class="number" id="totalSessions">0</div><div class="label">Total Sessions</div></div></div>
+      <div class="col-md-3 col-6"><div class="stat-card"><i class="fas fa-chart-line icon"></i><div class="number" id="totalEnergy">0 kWh</div><div class="label">Total Energy Sold</div></div></div>
+    </div>
+
+    <!-- Charts -->
+    <div class="row g-4">
+      <div class="col-md-6"><div class="card p-3"><canvas id="revenueChart"></canvas></div></div>
+      <div class="col-md-6"><div class="card p-3"><canvas id="energyChart"></canvas></div></div>
+    </div>
+
+    <div class="footer">© 2026 AA Jino EV Charging Station. All Rights Reserved.</div>
+  </div>
+</div>
+
+<script>
+  function getStats() {
+    const history = JSON.parse(localStorage.getItem('chargingHistory') || '[]');
+    const today = new Date().toDateString();
+    const now = new Date();
+    const month = now.getMonth();
+    const year = now.getFullYear();
+
+    let todayRev = 0, monthRev = 0, totalSessions = history.length, totalEnergy = 0;
+    history.forEach(item => {
+      const d = new Date(item.stopTime || Date.now());
+      totalEnergy += item.energy || 0;
+      if (d.toDateString() === today) todayRev += item.amount || 0;
+      if (d.getMonth() === month && d.getFullYear() === year) monthRev += item.amount || 0;
+    });
+    document.getElementById('todayRevenue').textContent = `₦${todayRev.toFixed(2)}`;
+    document.getElementById('monthRevenue').textContent = `₦${monthRev.toFixed(2)}`;
+    document.getElementById('totalSessions').textContent = totalSessions;
+    document.getElementById('totalEnergy').textContent = `${totalEnergy.toFixed(2)} kWh`;
+    return { todayRev, monthRev, totalSessions, totalEnergy };
+  }
+
+  // Charts
+  function initCharts() {
+    // Sample data - you can replace with real data from history
+    const ctx1 = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Revenue (₦)',
+          data: [1200, 1900, 800, 2100, 1500, 2300, 1800],
+          backgroundColor: '#28a745',
+          borderRadius: 6,
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+
+    const ctx2 = document.getElementById('energyChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Energy (kWh)',
+          data: [18, 25, 12, 30, 22, 35, 28],
+          borderColor: '#0d6efd',
+          tension: 0.3,
+          fill: false,
+        }]
+      },
+      options: { responsive: true }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!sessionStorage.getItem('loggedIn')) window.location.href = 'login.html';
+    getStats();
+    initCharts();
+  });
+</script>
+</body>
+</html>
