@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operator Dashboard · AA Jino EV</title>
+    <!-- Bootstrap 5, Font Awesome, Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* === RESET & BASE === */
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: #f0f4f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* === TOP HEADER / NAVBAR === */
+        .operator-header {
+            background: #ffffff;
+            padding: 14px 28px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid #e9edf4;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .operator-header .brand {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #1e3c5c;
+            letter-spacing: -0.3px;
+        }
+        .operator-header .brand i {
+            color: #28a745;
+            margin-right: 10px;
+        }
+        .operator-header .brand small {
+            font-weight: 400;
+            font-size: 0.75rem;
+            color: #6c7a8a;
+            margin-left: 6px;
+            letter-spacing: 0.3px;
+        }
+        .operator-header .page-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1e3c5c;
+            margin: 0;
+        }
+        .operator-header .page-title i {
+            color: #28a745;
+            margin-right: 8px;
+        }
+        .operator-header .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #1e3c5c;
+        }
+        .operator-header .user-info i {
+            font-size: 1.4rem;
+            color: #28a745;
+        }
+        .operator-header .user-info .badge-operator {
+            background: #e8f5e9;
+            color: #1e7e34;
+            font-weight: 500;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+        .operator-header .logout-link {
+            color: #dc3545;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .operator-header .logout-link:hover {
+            background: #fce4e4;
+        }
+        @media (max-width: 576px) {
+            .operator-header {
+                padding: 10px 16px;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .operator-header .brand {
+                font-size: 1rem;
+            }
+            .operator-header .brand small {
+                display: none;
+            }
+            .operator-header .page-title {
+                font-size: 0.95rem;
+            }
+            .operator-header .user-info .badge-operator {
+                display: none;
+            }
+            .operator-header .logout-link {
+                font-size: 0.75rem;
+                padding: 2px 10px;
+            }
+        }
+
+        /* === MAIN DASHBOARD === */
+        .dashboard-wrapper {
+            flex: 1;
+            padding: 28px 20px 20px;
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .dashboard-wrapper .section-title {
+            font-weight: 600;
+            color: #1e3c5c;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        .dashboard-wrapper .section-subtitle {
+            color: #6c7a8a;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            border-left: 4px solid #28a745;
+            padding-left: 14px;
+        }
+        @media (max-width: 576px) {
+            .dashboard-wrapper {
+                padding: 16px 12px 20px;
+            }
+            .dashboard-wrapper .section-title {
+                font-size: 1.2rem;
+            }
+            .dashboard-wrapper .section-subtitle {
+                font-size: 0.8rem;
+                padding-left: 10px;
+            }
+        }
+
+        /* === PORT CARDS === */
+        .port-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            height: 100%;
+            background: #ffffff;
+            overflow: hidden;
+        }
+        .port-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+        }
+        .port-card .card-header-custom {
+            padding: 14px 18px;
+            border-bottom: 1px solid #eef2f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+        .port-card .card-header-custom .port-label {
+            font-weight: 600;
+            color: #1e3c5c;
+            font-size: 0.95rem;
+        }
+        .port-card .card-header-custom .port-label i {
+            color: #28a745;
+            margin-right: 8px;
+        }
+        .port-card .card-body-custom {
+            padding: 16px 18px 18px;
+        }
+
+        /* Status badges */
+        .status-badge {
+            font-size: 0.68rem;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .status-available {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-charging {
+            background: #cce5ff;
+            color: #004085;
+            animation: pulse-bg 1.8s infinite;
+        }
+        .status-completed {
+            background: #fff3cd;
+            color: #856404;
+        }
+        @keyframes pulse-bg {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Timer */
+        .timer-display {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1e3c5c;
+            letter-spacing: 1px;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 6px 0;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+        }
+        @media (max-width: 576px) {
+            .timer-display {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Stats row */
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0 6px;
+            font-size: 0.85rem;
+            color: #2d4059;
+            border-bottom: 1px dashed #e9edf4;
+            margin-bottom: 10px;
+        }
+        .stats-row .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .stats-row .stat-item .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #8a99aa;
+            letter-spacing: 0.4px;
+            font-weight: 500;
+        }
+        .stats-row .stat-item .stat-value {
+            font-weight: 600;
+            color: #1e3c5c;
+            font-size: 0.95rem;
+        }
+        .stats-row .stat-item .stat-value.amount {
+            color: #28a745;
+        }
+
+        /* Button group */
+        .port-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .port-actions .btn {
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 10px;
+            flex: 1 0 auto;
+            min-width: 52px;
+            transition: all 0.2s;
+        }
+        .port-actions .btn i {
+            margin-right: 4px;
+        }
+        @media (max-width: 576px) {
+            .port-actions .btn {
+                font-size: 0.65rem;
+                padding: 8px 6px;
+                flex: 1 1 100%;
+            }
+            .port-actions .btn i {
+                margin-right: 6px;
+            }
+        }
+        @media (min-width: 577px) and (max-width: 992px) {
+            .port-actions .btn {
+                font-size: 0.65rem;
+                padding: 5px 8px;
+                flex: 1 1 45%;
+            }
+        }
+
+        /* Footer */
+        .dashboard-footer {
+            text-align: center;
+            padding: 24px 0 10px;
+            color: #8a99aa;
+            font-size: 0.8rem;
+            border-top: 1px solid #e9edf4;
+            margin-top: 32px;
+        }
+
+        /* Toast container */
+        .toast-container-custom {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 360px;
+            width: 100%;
+        }
+        .toast-custom {
+            background: #1e3c5c;
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideInToast 0.35s ease;
+            border-left: 4px solid #28a745;
+        }
+        .toast-custom i {
+            font-size: 1.2rem;
+            color: #28a745;
+        }
+        .toast-custom .toast-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+        .toast-custom .toast-close:hover {
+            color: #fff;
+        }
+        @keyframes slideInToast {
+            0% {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive grid overrides */
+        @media (max-width: 576px) {
+            .port-card .card-body-custom {
+                padding: 14px;
+            }
+            .stats-row .stat-item .stat-value {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== TOP HEADER ========== -->
+    <header class="operator-header d-flex flex-wrap align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2 gap-sm-3">
+            <div class="brand">
+                <i class="fas fa-charging-station"></i> AA Jino EV
+                <small>Charging Station</small>
+            </div>
+            <span class="page-title d-none d-sm-inline">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </span>
+        </div>
+        <div class="d-flex align-items-center gap-2 gap-sm-3">
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span id="operatorName" class="d-none d-sm-inline">Jino</span>
+                <span class="badge-operator">Operator</span>
+            </div>
+            <a href="login.html" class="logout-link" onclick="sessionStorage.removeItem('loggedIn')">
+                <i class="fas fa-sign-out-alt"></i> <span class="d-none d-sm-inline">Logout</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ========== MAIN DASHBOARD ========== -->
+    <div class="dashboard-wrapper">
+
+        <!-- Section header -->
+        <div class="d-flex flex-wrap align-items-center justify-content-between mb-2">
+            <div>
+                <h5 class="section-title mb-0"><i class="fas fa-bolt text-success me-2"></i>Live Charging Ports</h5>
+                <div class="section-subtitle">Monitor and manage all active charging sessions</div>
+            </div>
+            <div class="mt-2 mt-sm-0">
+                <span class="badge bg-light text-dark border px-3 py-2">
+                    <i class="fas fa-plug text-success me-1"></i> <span id="portCountDisplay">4</span> Ports
+                </span>
+            </div>
+        </div>
+
+        <!-- Ports Grid -->
+        <div class="row g-4" id="portsContainer">
+            <!-- Rendered by JavaScript -->
+        </div>
+
+        <!-- Footer -->
+        <div class="dashboard-footer">
+           
+        
+        <marquee><h1 style="font-size:150px;color:red">Welcome to AA Jino Electric Vehicle Charging Station and Maintenance Services</h1></marquee>
+    </div>
+    </div>
+
+    <!-- ========== TOAST CONTAINER ========== -->
+    <div class="toast-container-custom" id="toastContainer"></div>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script>
+        // ============================================================
+        //  CONFIG
+        // ============================================================
+        const PORTS_COUNT = 4;
+        const RATE_KW = 7.2;
+        const PRICE_PER_KWH = 150;
+
+        // ============================================================
+        //  STATE
+        // ============================================================
+        let ports = [];
+
+        // ============================================================
+        //  HELPERS
+        // ============================================================
+        function formatTime(sec) {
+            const h = String(Math.floor(sec / 3600)).padStart(2, '0');
+            const m = String(Math.floor((sec % 3600) / 60)).padStart(2, '0');
+            const s = String(Math.floor(sec % 60)).padStart(2, '0');
+            return `${h}:${m}:${s}`;
+        }
+
+        function generateReceipt() {
+            return 'RCP-' + Date.now().toString().slice(-8) + '-' + Math.floor(Math.random() * 1000);
+        }
+
+        function saveToHistory(receipt) {
+            let history = JSON.parse(localStorage.getItem('chargingHistory') || '[]');
+            history.push(receipt);
+            localStorage.setItem('chargingHistory', JSON.stringify(history));
+        }
+
+        // ============================================================
+        //  TOAST
+        // ============================================================
+        function showToast(msg, type) {
+            type = type || 'success';
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast-custom';
+            const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+            toast.innerHTML = `
+                <i class="fas ${icon}"></i>
+                <span>${msg}</span>
+                <button class="toast-close" onclick="this.parentElement.remove()">&times;</button>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                if (toast.parentElement) toast.remove();
+            }, 4500);
+        }
+
+        // ============================================================
+        //  INIT PORTS
+        // ============================================================
+        function initPorts() {
+            ports = [];
+            for (let i = 1; i <= PORTS_COUNT; i++) {
+                ports[i] = {
+                    id: i,
+                    status: 'Available',
+                    timer: 0,
+                    energy: 0,
+                    amount: 0,
+                    interval: null,
+                    running: false,
+                    startTime: null,
+                    stopTime: null,
+                    receipt: null,
+                };
+            }
+        }
+        initPorts();
+
+        // ============================================================
+        //  RENDER
+        // ============================================================
+        function renderPorts() {
+            const container = document.getElementById('portsContainer');
+            container.innerHTML = '';
+            document.getElementById('portCountDisplay').textContent = PORTS_COUNT;
+
+            for (let i = 1; i <= PORTS_COUNT; i++) {
+                const p = ports[i];
+                const statusClass =
+                    p.status === 'Available' ? 'status-available' :
+                    p.status === 'Charging' ? 'status-charging' :
+                    'status-completed';
+
+                const card = document.createElement('div');
+                card.className = 'col-12 col-sm-6 col-xl-3';
+                card.innerHTML = `
+                    <div class="port-card">
+                        <div class="card-header-custom">
+                            <span class="port-label"><i class="fas fa-plug"></i>Port ${i}</span>
+                            <span class="status-badge ${statusClass}" id="statusBadge_${i}">${p.status}</span>
+                        </div>
+                        <div class="card-body-custom">
+                            <div class="timer-display mb-2" id="timer_${i}">${formatTime(p.timer)}</div>
+                            <div class="stats-row">
+                                <div class="stat-item">
+                                    <span class="stat-label">Energy</span>
+                                    <span class="stat-value" id="energy_${i}">${p.energy.toFixed(3)} kWh</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Amount</span>
+                                    <span class="stat-value amount" id="amount_${i}">₦${p.amount.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            <div class="port-actions">
+                                <button class="btn btn-success" id="startBtn_${i}" onclick="startCharging(${i})" ${p.status === 'Charging' ? 'disabled' : ''}>
+                                    <i class="fas fa-play"></i> Start
+                                </button>
+                                <button class="btn btn-warning" id="stopBtn_${i}" onclick="stopCharging(${i})" ${p.status !== 'Charging' ? 'disabled' : ''}>
+                                    <i class="fas fa-stop"></i> Stop
+                                </button>
+                                <button class="btn btn-info text-white" id="printBtn_${i}" onclick="printReceipt(${i})" ${p.status !== 'Completed' ? 'disabled' : ''}>
+                                    <i class="fas fa-receipt"></i> Print
+                                </button>
+                                <button class="btn btn-secondary" id="resetBtn_${i}" onclick="resetPort(${i})">
+                                    <i class="fas fa-undo"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                `;
+                container.appendChild(card);
+            }
+        }
+
+        // ============================================================
+        //  UPDATE UI
+        // ============================================================
+        function updatePortUI(i) {
+            const p = ports[i];
+            const badge = document.getElementById(`statusBadge_${i}`);
+            if (badge) {
+                badge.textContent = p.status;
+                badge.className = 'status-badge ' + (
+                    p.status === 'Available' ? 'status-available' :
+                    p.status === 'Charging' ? 'status-charging' :
+                    'status-completed'
+                );
+            }
+            const timerEl = document.getElementById(`timer_${i}`);
+            if (timerEl) timerEl.textContent = formatTime(p.timer);
+            const energyEl = document.getElementById(`energy_${i}`);
+            if (energyEl) energyEl.textContent = p.energy.toFixed(3) + ' kWh';
+            const amountEl = document.getElementById(`amount_${i}`);
+            if (amountEl) amountEl.textContent = '₦' + p.amount.toFixed(2);
+
+            const startBtn = document.getElementById(`startBtn_${i}`);
+            const stopBtn = document.getElementById(`stopBtn_${i}`);
+            const printBtn = document.getElementById(`printBtn_${i}`);
+            if (startBtn) startBtn.disabled = (p.status === 'Charging');
+            if (stopBtn) stopBtn.disabled = (p.status !== 'Charging');
+            if (printBtn) printBtn.disabled = (p.status !== 'Completed');
+        }
+
+        // ============================================================
+        //  CHARGING ACTIONS
+        // ============================================================
+        function startCharging(i) {
+            const p = ports[i];
+            if (p.running) return;
+            p.status = 'Charging';
+            p.running = true;
+            p.startTime = new Date();
+            p.stopTime = null;
+            p.receipt = null;
+
+            p.interval = setInterval(() => {
+                p.timer += 1;
+                p.energy += RATE_KW / 3600;
+                p.amount = p.energy * PRICE_PER_KWH;
+                updatePortUI(i);
+            }, 1000);
+
+            updatePortUI(i);
+            showToast(`⚡ Port ${i} charging started`, 'success');
+        }
+
+        function stopCharging(i) {
+            const p = ports[i];
+            if (!p.running) return;
+            clearInterval(p.interval);
+            p.running = false;
+            p.stopTime = new Date();
+            p.status = 'Completed';
+
+            p.receipt = {
+                receiptNo: generateReceipt(),
+                port: i,
+                startTime: p.startTime,
+                stopTime: p.stopTime,
+                duration: p.timer,
+                energy: p.energy,
+                amount: p.amount,
+                pricePerKwh: PRICE_PER_KWH,
+                operator: sessionStorage.getItem('operator') || 'Jino',
+                status: 'Completed',
+            };
+            saveToHistory(p.receipt);
+            updatePortUI(i);
+            showToast(`✅ Port ${i} stopped. Receipt ready.`, 'success');
+        }
+
+        function resetPort(i) {
+            const p = ports[i];
+            if (p.running) {
+                clearInterval(p.interval);
+                p.running = false;
+            }
+            p.status = 'Available';
+            p.timer = 0;
+            p.energy = 0;
+            p.amount = 0;
+            p.startTime = null;
+            p.stopTime = null;
+            p.receipt = null;
+            updatePortUI(i);
+            showToast(`🔄 Port ${i} reset`, 'success');
+        }
+
+        function printReceipt(i) {
+            const p = ports[i];
+            if (!p.receipt) {
+                showToast('⚠️ No receipt data. Stop charging first.', 'warning');
+                return;
+            }
+            sessionStorage.setItem('receiptData', JSON.stringify(p.receipt));
+            window.open('receipt.html', '_blank');
+        }
+
+        // ============================================================
+        //  DOM READY
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check login
+            if (!sessionStorage.getItem('loggedIn')) {
+                window.location.href = 'login.html';
+                return;
+            }
+            const operator = sessionStorage.getItem('operator') || 'Jino';
+            document.getElementById('operatorName').textContent = operator;
+
+            renderPorts();
+
+            // If any port was left in 'Charging' state due to page refresh, reset it.
+            // We'll set all to Available on load (fresh start).
+            for (let i = 1; i <= PORTS_COUNT; i++) {
+                if (ports[i].running) {
+                    clearInterval(ports[i].interval);
+                    ports[i].running = false;
+                }
+                ports[i].status = 'Available';
+                ports[i].timer = 0;
+                ports[i].energy = 0;
+                ports[i].amount = 0;
+                ports[i].startTime = null;
+                ports[i].stopTime = null;
+                ports[i].receipt = null;
+                updatePortUI(i);
+            }
+        });
+    </script>
+
+</body>
+</html>
