@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard · AA Jino EV</title>
+  <!-- Bootstrap 5, Font Awesome, Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Include common styles and sidebar -->
+  <link rel="stylesheet" href="common.css" /> <!-- We'll embed styles inline for self-contained files, but for simplicity we put in each file -->
+  <style>
+    /* === COMMON STYLES (copied to all pages) === */
+    * { font-family: 'Poppins', sans-serif; }
+    body { background: #f4f7fc; }
+    .wrapper { display: flex; width: 100%; }
+    .sidebar {
+      width: 260px;
+      min-height: 100vh;
+      background: #1e3c5c;
+      color: #fff;
+      transition: all 0.3s;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+    .sidebar .brand {
+      padding: 20px 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .sidebar .brand i { color: #28a745; margin-right: 10px; }
+    .sidebar .nav-link {
+      color: rgba(255,255,255,0.7);
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin: 4px 10px;
+      transition: 0.3s;
+    }
+    .sidebar .nav-link:hover, .sidebar .nav-link.active {
+      background: rgba(40,167,69,0.2);
+      color: #fff;
+    }
+    .sidebar .nav-link i { width: 24px; margin-right: 10px; }
+    .main-content { flex: 1; padding: 20px; }
+    .topbar {
+      background: #fff;
+      padding: 15px 25px;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .topbar h4 { margin: 0; font-weight: 600; color: #1e3c5c; }
+    .topbar .user { font-weight: 500; }
+    .footer {
+      text-align: center;
+      padding: 20px 0 10px;
+      color: #6c757d;
+      font-size: 0.9rem;
+      border-top: 1px solid #dee2e6;
+      margin-top: 30px;
+    }
+    .card-station {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: 0.3s;
+      height: 100%;
+    }
+    .card-station:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+    .card-station .card-header {
+      background: none;
+      border-bottom: 1px solid #e9ecef;
+      font-weight: 600;
+      padding: 12px 16px;
+    }
+    .status-badge { font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; }
+    .status-available { background: #d4edda; color: #155724; }
+    .status-charging { background: #cce5ff; color: #004085; animation: pulse-bg 1.5s infinite; }
+    .status-completed { background: #fff3cd; color: #856404; }
+    @keyframes pulse-bg { 0%{opacity:1;} 50%{opacity:0.6;} 100%{opacity:1;} }
+    .port-buttons .btn { font-size: 0.7rem; padding: 4px 8px; margin: 2px; }
+    .timer-display { font-size: 1.2rem; font-weight: 600; color: #1e3c5c; }
+    .value-display { font-weight: 600; }
+    @media (max-width: 768px) {
+      .sidebar { width: 200px; }
+      .sidebar .brand { font-size: 1rem; }
+    }
+    @media (max-width: 576px) {
+      .sidebar { position: fixed; left: -280px; width: 280px; transition: 0.3s; }
+      .sidebar.open { left: 0; }
+      .main-content { margin-left: 0; }
+    }
+    /* toast */
+    .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="brand"><i class="fas fa-charging-station"></i> AA Jino EV</div>
+    <div class="nav flex-column">
+      <a href="dashboard.html" class="nav-link active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+      <a href="history.html" class="nav-link"><i class="fas fa-history"></i> Charging History</a>
+      <a href="reports.html" class="nav-link"><i class="fas fa-chart-bar"></i> Reports</a>
+      <a href="users.html" class="nav-link"><i class="fas fa-users"></i> Users</a>
+      <a href="ports.html" class="nav-link"><i class="fas fa-plug"></i> Charging Ports</a>
+      <a href="settings.html" class="nav-link"><i class="fas fa-cog"></i> Settings</a>
+      <a href="profile.html" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+      <a href="login.html" class="nav-link text-danger" onclick="sessionStorage.removeItem('loggedIn')"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="topbar">
+      <h4><i class="fas fa-charging-station me-2 text-success"></i>Dashboard</h4>
+      <span class="user"><i class="fas fa-user-circle me-1"></i> <span id="operatorName">Jino</span></span>
+    </div>
+
+    <div class="row g-4" id="portsContainer">
+      <!-- Ports will be generated by JavaScript -->
+    </div>
+
+    <div class="footer">© 2026 AA Jino EV Charging Station. All Rights Reserved.</div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-container"></div>
+
+<script>
+  // === GLOBALS ===
+  const PORTS_COUNT = 8;
+  const RATE_KW = 7.2;        // kW
+  const PRICE_PER_KWH = 150;  // ₦
+
+  // Port state array
+  let ports = [];
+
+  // Helper to format time
+  function formatTime(sec) {
+    const h = String(Math.floor(sec / 3600)).padStart(2, '0');
+    const m = String(Math.floor((sec % 3600) / 60)).padStart(2, '0');
+    const s = String(Math.floor(sec % 60)).padStart(2, '0');
+    return `${h}:${m}:${s}`;
+  }
+
+  // Generate receipt number
+  function generateReceipt() {
+    return 'RCP-' + Date.now().toString().slice(-8) + '-' + Math.floor(Math.random()*1000);
+  }
+
+  // Save to history (localStorage)
+  function saveToHistory(receipt) {
+    let history = JSON.parse(localStorage.getItem('chargingHistory') || '[]');
+    history.push(receipt);
+    localStorage.setItem('chargingHistory', JSON.stringify(history));
+  }
+
+  // Initialize ports
+  function initPorts() {
+    for (let i = 1; i <= PORTS_COUNT; i++) {
+      ports[i] = {
+        id: i,
+        status: 'Available',
+        timer: 0,
+        energy: 0,
+        amount: 0,
+        interval: null,
+        running: false,
+        startTime: null,
+        stopTime: null,
+        receipt: null,
+      };
+    }
+  }
+  initPorts();
+
+  // Render ports
+  function renderPorts() {
+    const container = document.getElementById('portsContainer');
+    container.innerHTML = '';
+    for (let i = 1; i <= PORTS_COUNT; i++) {
+      const p = ports[i];
+      const statusClass = 
+        p.status === 'Available' ? 'status-available' :
+        p.status === 'Charging' ? 'status-charging' :
+        'status-completed';
+      const card = document.createElement('div');
+      card.className = 'col-xl-3 col-lg-4 col-md-6';
+      card.innerHTML = `
+        <div class="card card-station">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span><i class="fas fa-plug me-2 text-success"></i>Port ${i}</span>
+            <span class="status-badge ${statusClass}" id="statusBadge_${i}">${p.status}</span>
+          </div>
+          <div class="card-body">
+            <div class="timer-display text-center mb-2" id="timer_${i}">${formatTime(p.timer)}</div>
+            <div class="d-flex justify-content-between">
+              <span>Energy: <strong id="energy_${i}">${p.energy.toFixed(3)}</strong> kWh</span>
+              <span>Amount: <strong id="amount_${i}">₦${p.amount.toFixed(2)}</strong></span>
+            </div>
+            <div class="port-buttons mt-3 d-flex flex-wrap gap-1">
+              <button class="btn btn-success btn-sm" id="startBtn_${i}" onclick="startCharging(${i})" ${p.status === 'Charging' ? 'disabled' : ''}><i class="fas fa-play"></i> Start</button>
+              <button class="btn btn-warning btn-sm" id="stopBtn_${i}" onclick="stopCharging(${i})" ${p.status !== 'Charging' ? 'disabled' : ''}><i class="fas fa-stop"></i> Stop</button>
+              <button class="btn btn-info btn-sm text-white" id="printBtn_${i}" onclick="printReceipt(${i})" ${p.status !== 'Completed' ? 'disabled' : ''}><i class="fas fa-receipt"></i> Print</button>
+              <button class="btn btn-secondary btn-sm" id="resetBtn_${i}" onclick="resetPort(${i})"><i class="fas fa-undo"></i> Reset</button>
+            </div>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    }
+  }
+
+  // Update UI for a port
+  function updatePortUI(i) {
+    const p = ports[i];
+    const badge = document.getElementById(`statusBadge_${i}`);
+    if (badge) {
+      badge.textContent = p.status;
+      badge.className = 'status-badge ' + (
+        p.status === 'Available' ? 'status-available' :
+        p.status === 'Charging' ? 'status-charging' :
+        'status-completed'
+      );
+    }
+    document.getElementById(`timer_${i}`).textContent = formatTime(p.timer);
+    document.getElementById(`energy_${i}`).textContent = p.energy.toFixed(3);
+    document.getElementById(`amount_${i}`).textContent = `₦${p.amount.toFixed(2)}`;
+    // Buttons
+    document.getElementById(`startBtn_${i}`).disabled = (p.status === 'Charging');
+    document.getElementById(`stopBtn_${i}`).disabled = (p.status !== 'Charging');
+    document.getElementById(`printBtn_${i}`).disabled = (p.status !== 'Completed');
+  }
+
+  // Start charging
+  function startCharging(i) {
+    const p = ports[i];
+    if (p.running) return;
+    p.status = 'Charging';
+    p.running = true;
+    p.startTime = new Date();
+    p.stopTime = null;
+    p.receipt = null;
+    // If timer was reset, we start fresh; else resume? We'll reset timer on reset only.
+    // We'll start from current timer value.
+    p.interval = setInterval(() => {
+      p.timer += 1;
+      p.energy += RATE_KW / 3600;
+      p.amount = p.energy * PRICE_PER_KWH;
+      updatePortUI(i);
+    }, 1000);
+    updatePortUI(i);
+    showToast(`Port ${i} charging started`);
+  }
+
+  // Stop charging
+  function stopCharging(i) {
+    const p = ports[i];
+    if (!p.running) return;
+    clearInterval(p.interval);
+    p.running = false;
+    p.stopTime = new Date();
+    p.status = 'Completed';
+    // Generate receipt data
+    p.receipt = {
+      receiptNo: generateReceipt(),
+      port: i,
+      startTime: p.startTime,
+      stopTime: p.stopTime,
+      duration: p.timer,
+      energy: p.energy,
+      amount: p.amount,
+      pricePerKwh: PRICE_PER_KWH,
+      operator: sessionStorage.getItem('operator') || 'Jino',
+      status: 'Completed',
+    };
+    // Save to history
+    saveToHistory(p.receipt);
+    updatePortUI(i);
+    showToast(`Port ${i} charging stopped. Receipt ready.`);
+  }
+
+  // Reset port
+  function resetPort(i) {
+    const p = ports[i];
+    if (p.running) {
+      clearInterval(p.interval);
+      p.running = false;
+    }
+    p.status = 'Available';
+    p.timer = 0;
+    p.energy = 0;
+    p.amount = 0;
+    p.startTime = null;
+    p.stopTime = null;
+    p.receipt = null;
+    updatePortUI(i);
+    showToast(`Port ${i} reset`);
+  }
+
+  // Print receipt: open receipt.html with data in sessionStorage
+  function printReceipt(i) {
+    const p = ports[i];
+    if (!p.receipt) {
+      alert('No receipt data. Please stop charging first.');
+      return;
+    }
+    // Store receipt data in sessionStorage for receipt page
+    sessionStorage.setItem('receiptData', JSON.stringify(p.receipt));
+    // Open receipt page in new tab/window
+    window.open('receipt.html', '_blank');
+  }
+
+  // Toast notifications
+  function showToast(msg) {
+    const container = document.querySelector('.toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast align-items-center text-white bg-success border-0 show';
+    toast.setAttribute('role', 'alert');
+    toast.innerHTML = `
+      <div class="d-flex">
+        <div class="toast-body">${msg}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    `;
+    container.appendChild(toast);
+    setTimeout(() => { toast.remove(); }, 4000);
+  }
+
+  // On page load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check login
+    if (!sessionStorage.getItem('loggedIn')) {
+      window.location.href = 'login.html';
+      return;
+    }
+    document.getElementById('operatorName').textContent = sessionStorage.getItem('operator') || 'Jino';
+    renderPorts();
+    // Load any saved state? Not needed; we start fresh.
+  });
+</script>
+
+<!-- Bootstrap JS for toasts (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
