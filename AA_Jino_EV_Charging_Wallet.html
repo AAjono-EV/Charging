@@ -1,0 +1,4034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AA Jino EV Charging Station</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  /* =========================================================
+   AA JINO EV WALLET
+   wallet.css
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f7f6;
+    color: #1f2937;
+    min-height: 100vh;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   AUTHENTICATION PAGE
+========================================================= */
+
+#authPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 15px;
+    background:
+        linear-gradient(
+            135deg,
+            #064e3b 0%,
+            #087f5b 50%,
+            #0b9b70 100%
+        );
+}
+
+
+/* =========================================================
+   AUTH CARD
+========================================================= */
+
+.auth-card {
+    width: 100%;
+    max-width: 470px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 38px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 15px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #087f5b;
+    color: #ffffff;
+    font-size: 30px;
+    box-shadow: 0 10px 25px rgba(8, 127, 91, 0.25);
+}
+
+.auth-card > h2 {
+    text-align: center;
+    color: #064e3b;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   AUTH HEADINGS
+========================================================= */
+
+.auth-card h4 {
+    color: #1f2937;
+    font-size: 21px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.section-description {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #dfe3e8;
+    border-radius: 10px;
+    padding: 0 14px;
+    background: #ffffff;
+    color: #1f2937;
+    outline: none;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #9ca3af;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #087f5b;
+    box-shadow: 0 0 0 3px rgba(8, 127, 91, 0.10);
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.form-group select {
+    cursor: pointer;
+    appearance: auto;
+}
+
+
+/* =========================================================
+   MAIN BUTTON
+========================================================= */
+
+.main-btn {
+    width: 100%;
+    min-height: 48px;
+    border: none;
+    border-radius: 10px;
+    background: #087f5b;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    transition: 0.2s ease;
+}
+
+.main-btn:hover {
+    background: #064e3b;
+    transform: translateY(-1px);
+}
+
+.main-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   REGISTER LINK
+========================================================= */
+
+.register-link {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.register-link button {
+    border: none;
+    background: transparent;
+    color: #087f5b;
+    font-weight: 700;
+    padding: 0;
+    margin-left: 4px;
+}
+
+.register-link button:hover {
+    color: #064e3b;
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.alert {
+    border-radius: 9px;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.alert-danger {
+    color: #842029;
+    background: #f8d7da;
+    border-color: #f5c2c7;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    width: 100%;
+    min-height: 72px;
+    padding: 0 5%;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #064e3b;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.brand-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    background: #087f5b;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+}
+
+
+/* =========================================================
+   ACCOUNT
+========================================================= */
+
+.account {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.account-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.account-info strong {
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.account-info small {
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+.avatar {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    background: #087f5b;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-btn {
+    width: 39px;
+    height: 39px;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+
+/* =========================================================
+   WALLET CONTAINER
+========================================================= */
+
+.wallet-container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 35px 25px 60px;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.page-title {
+    margin-bottom: 25px;
+}
+
+.page-title h2 {
+    color: #064e3b;
+    font-size: 27px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.page-title p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BALANCE CARD
+========================================================= */
+
+.balance-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 235px;
+    border-radius: 20px;
+    padding: 35px;
+    background:
+        linear-gradient(
+            135deg,
+            #064e3b,
+            #087f5b
+        );
+    color: #ffffff;
+    box-shadow: 0 15px 35px rgba(6, 78, 59, 0.18);
+    margin-bottom: 25px;
+}
+
+.balance-card::before {
+    content: "";
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 50%;
+    right: -80px;
+    top: -100px;
+}
+
+.balance-card::after {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+    right: 30px;
+    bottom: -100px;
+}
+
+.balance-content {
+    position: relative;
+    z-index: 2;
+}
+
+.balance-label {
+    display: block;
+    color: rgba(255,255,255,0.72);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.balance-card h1 {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   BALANCE BUTTONS
+========================================================= */
+
+.balance-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.white-btn,
+.outline-btn {
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s ease;
+}
+
+.white-btn {
+    border: none;
+    background: #ffffff;
+    color: #087f5b;
+}
+
+.white-btn:hover {
+    background: #f0fdf4;
+    transform: translateY(-1px);
+}
+
+.outline-btn {
+    border: 1px solid rgba(255,255,255,0.65);
+    background: transparent;
+    color: #ffffff;
+}
+
+.outline-btn:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+
+/* =========================================================
+   STATISTICS GRID
+========================================================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   STAT CARD
+========================================================= */
+
+.stat-card {
+    background: #ffffff;
+    border: 1px solid #e8ecea;
+    border-radius: 15px;
+    padding: 21px;
+    display: grid;
+    grid-template-columns: 45px 1fr;
+    column-gap: 13px;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.035);
+}
+
+.stat-icon {
+    grid-row: span 2;
+    width: 45px;
+    height: 45px;
+    border-radius: 11px;
+    background: #e8f6f1;
+    color: #087f5b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-card span {
+    color: #8a929b;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.stat-card strong {
+    color: #1f2937;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PAYMENT NOTICE
+========================================================= */
+
+.payment-notice {
+    background: #ffffff;
+    border: 1px solid #e4ebe8;
+    border-radius: 15px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.notice-icon {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #e8f6f1;
+    color: #087f5b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-notice strong {
+    display: block;
+    color: #064e3b;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.payment-notice p {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 0;
+}
+
+
+/* =========================================================
+   TRANSACTIONS CARD
+========================================================= */
+
+.transactions-card {
+    background: #ffffff;
+    border: 1px solid #e6ebe9;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.035);
+}
+
+.transactions-header {
+    min-height: 72px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #edf0ef;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.transactions-header h4 {
+    color: #1f2937;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.transactions-header input {
+    width: 240px;
+    height: 40px;
+    border: 1px solid #dfe3e8;
+    border-radius: 8px;
+    padding: 0 13px;
+    outline: none;
+    font-size: 13px;
+    color: #374151;
+}
+
+.transactions-header input:focus {
+    border-color: #087f5b;
+    box-shadow: 0 0 0 3px rgba(8, 127, 91, 0.08);
+}
+
+
+/* =========================================================
+   TRANSACTION ITEM
+========================================================= */
+
+.transaction {
+    min-height: 78px;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f2f1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.transaction:last-child {
+    border-bottom: none;
+}
+
+.transaction-left {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+}
+
+.transaction-icon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deposit-icon {
+    background: #e8f6f1;
+    color: #087f5b;
+}
+
+.payment-icon {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.transaction-left strong {
+    display: block;
+    color: #374151;
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+.transaction-left small {
+    display: block;
+    color: #9ca3af;
+    font-size: 11px;
+}
+
+.positive,
+.negative {
+    text-align: right;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.positive {
+    color: #087f5b;
+}
+
+.negative {
+    color: #dc2626;
+}
+
+.positive span,
+.negative span {
+    display: block;
+    font-size: 10px;
+    color: #9ca3af;
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+    padding: 55px 20px;
+    text-align: center;
+    color: #9ca3af;
+}
+
+.empty-state i {
+    font-size: 30px;
+    margin-bottom: 12px;
+    opacity: 0.7;
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PAYMENT MODAL
+========================================================= */
+
+.modal-content {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.20);
+}
+
+.modal-header {
+    padding: 18px 20px;
+    border-bottom: 1px solid #edf0ef;
+}
+
+.modal-title {
+    color: #064e3b;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.modal-title i {
+    color: #087f5b;
+    margin-right: 7px;
+}
+
+.modal-body {
+    padding: 22px;
+}
+
+.modal-body > label {
+    display: block;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   STATION BOX
+========================================================= */
+
+.station-box {
+    padding: 14px;
+    margin-bottom: 20px;
+    border: 1px solid #dceee8;
+    background: #f0faf7;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.station-box > i {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+    background: #087f5b;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.station-box strong {
+    display: block;
+    color: #064e3b;
+    font-size: 13px;
+}
+
+.station-box small {
+    display: block;
+    color: #6b7280;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   AMOUNT INPUT
+========================================================= */
+
+.amount-input {
+    height: 50px;
+    border: 1px solid #dfe3e8;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.2s ease;
+}
+
+.amount-input:focus-within {
+    border-color: #087f5b;
+    box-shadow: 0 0 0 3px rgba(8,127,91,0.08);
+}
+
+.amount-input span {
+    height: 100%;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    background: #f7f8f8;
+    color: #087f5b;
+    font-weight: 700;
+    border-right: 1px solid #e5e7eb;
+}
+
+.amount-input input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0 13px;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.modal-footer {
+    border-top: 1px solid #edf0ef;
+    padding: 14px 20px;
+}
+
+.modal-footer .btn {
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 16px;
+}
+
+.modal-footer .btn-success {
+    background: #087f5b;
+    border-color: #087f5b;
+}
+
+.modal-footer .btn-success:hover {
+    background: #064e3b;
+    border-color: #064e3b;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .wallet-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    /* AUTH */
+
+    #authPage {
+        padding: 20px 12px;
+        align-items: flex-start;
+        padding-top: 35px;
+    }
+
+    .auth-card {
+        padding: 28px 20px;
+        border-radius: 16px;
+    }
+
+    .logo {
+        width: 58px;
+        height: 58px;
+        font-size: 26px;
+    }
+
+    .auth-card > h2 {
+        font-size: 24px;
+    }
+
+
+    /* NAVBAR */
+
+    .navbar {
+        min-height: 65px;
+        padding: 0 15px;
+    }
+
+    .brand {
+        font-size: 16px;
+    }
+
+    .brand-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .account-info {
+        display: none;
+    }
+
+    .account {
+        gap: 7px;
+    }
+
+    .avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    .logout-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+
+    /* WALLET */
+
+    .wallet-container {
+        padding: 25px 14px 45px;
+    }
+
+    .page-title h2 {
+        font-size: 23px;
+    }
+
+    .page-title {
+        margin-bottom: 20px;
+    }
+
+
+    /* BALANCE */
+
+    .balance-card {
+        min-height: auto;
+        padding: 26px 22px;
+        border-radius: 16px;
+    }
+
+    .balance-card h1 {
+        font-size: 32px;
+        margin-bottom: 25px;
+    }
+
+    .balance-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .white-btn,
+    .outline-btn {
+        width: 100%;
+    }
+
+
+    /* STATS */
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 17px;
+    }
+
+
+    /* NOTICE */
+
+    .payment-notice {
+        padding: 15px;
+    }
+
+
+    /* TRANSACTIONS */
+
+    .transactions-header {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .transactions-header input {
+        width: 100%;
+    }
+
+    .transaction {
+        padding: 14px 15px;
+    }
+
+    .transaction-left {
+        gap: 9px;
+    }
+
+    .transaction-icon {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+    }
+
+    .transaction-left strong {
+        font-size: 12px;
+    }
+
+    .transaction-left small {
+        font-size: 10px;
+    }
+
+    .positive,
+    .negative {
+        font-size: 11px;
+    }
+
+
+    /* MODAL */
+
+    .modal-dialog {
+        margin: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .auth-card {
+        padding: 25px 17px;
+    }
+
+    .balance-card h1 {
+        font-size: 28px;
+    }
+
+    .payment-notice {
+        gap: 10px;
+    }
+
+    .notice-icon {
+        width: 35px;
+        height: 35px;
+        flex-basis: 35px;
+    }
+
+    .payment-notice p {
+        font-size: 12px;
+    }
+
+    .transaction {
+        gap: 8px;
+    }
+
+    .transaction-left {
+        min-width: 0;
+    }
+
+    .transaction-left > div:last-child {
+        min-width: 0;
+    }
+
+    .transaction-left strong {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+    }
+
+}
+
+
+/* ============================  
+    
+    
+
+
+
+
+    /* =========================================================
+       GENERAL
+    ========================================================= */
+
+    * {
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f4f7fc;
+      overflow-x: hidden;
+    }
+
+
+    /* =========================================================
+       FULL SCREEN DASHBOARD
+    ========================================================= */
+
+    .main-content {
+      width: 100%;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+
+    /* =========================================================
+       TOP BAR
+    ========================================================= */
+
+    .topbar {
+      background: #ffffff;
+      padding: 15px 25px;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      margin-bottom: 25px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .topbar h4 {
+      margin: 0;
+      font-weight: 600;
+      color: #1e3c5c;
+    }
+
+    .topbar .user {
+      font-weight: 500;
+      color: #1e3c5c;
+    }
+
+
+    /* =========================================================
+       PORT CARDS
+    ========================================================= */
+
+    .card-station {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+      height: 100%;
+    }
+
+    .card-station:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-station .card-header {
+      background: none;
+      border-bottom: 1px solid #e9ecef;
+      font-weight: 600;
+      padding: 12px 16px;
+    }
+
+
+    /* =========================================================
+       STATUS
+    ========================================================= */
+
+    .status-badge {
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .status-available {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-charging {
+      background: #cce5ff;
+      color: #004085;
+      animation: pulse-bg 1.5s infinite;
+    }
+
+    .status-completed {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    @keyframes pulse-bg {
+
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
+
+      100% {
+        opacity: 1;
+      }
+
+    }
+
+
+    /* =========================================================
+       PORT BUTTONS
+    ========================================================= */
+
+    .port-buttons .btn {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      margin: 2px;
+    }
+
+    .timer-display {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1e3c5c;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .dashboard-footer {
+      text-align: center;
+      padding: 20px 0 10px;
+      color: #8a99aa;
+      font-size: 0.8rem;
+      border-top: 1px solid #e9edf4;
+      margin-top: 32px;
+    }
+
+
+    /* =========================================================
+       WELCOME MARQUEE
+    ========================================================= */
+
+    .welcome-marquee {
+      width: 100%;
+      overflow: hidden;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      background: transparent;
+    }
+
+    .welcome-marquee marquee {
+      color: red;
+      font-weight: 700;
+    }
+
+
+    /* =========================================================
+       RECEIPT POPUP / MODAL
+    ========================================================= */
+
+    .receipt-overlay {
+      display: none;
+
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background: rgba(0, 0, 0, 0.65);
+
+      z-index: 10000;
+
+      justify-content: center;
+      align-items: center;
+
+      padding: 20px;
+    }
+
+    .receipt-overlay.show {
+      display: flex;
+    }
+
+
+    .receipt-popup {
+      width: 100%;
+      max-width: 500px;
+
+      max-height: 90vh;
+      overflow-y: auto;
+
+      background: #ffffff;
+
+      border-radius: 12px;
+
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+      animation: receiptOpen 0.25s ease;
+    }
+
+
+    @keyframes receiptOpen {
+
+      from {
+        transform: scale(0.85);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+    }
+
+
+    /* =========================================================
+       RECEIPT
+    ========================================================= */
+
+    .receipt-header {
+      text-align: center;
+      padding: 20px;
+      border-bottom: 1px dashed #999;
+    }
+
+    .receipt-header i {
+      font-size: 35px;
+      color: #28a745;
+      margin-bottom: 8px;
+    }
+
+    .receipt-header h3 {
+      margin: 0;
+      color: #1e3c5c;
+      font-weight: 700;
+    }
+
+    .receipt-header p {
+      margin: 3px 0;
+      color: #777;
+      font-size: 13px;
+    }
+
+
+    .receipt-body {
+      padding: 20px;
+    }
+
+
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+
+      padding: 9px 0;
+
+      border-bottom: 1px solid #eeeeee;
+
+      font-size: 14px;
+    }
+
+    .receipt-row:last-child {
+      border-bottom: none;
+    }
+
+    .receipt-label {
+      color: #666;
+    }
+
+    .receipt-value {
+      font-weight: 600;
+      color: #222;
+      text-align: right;
+    }
+
+
+    .receipt-total {
+      margin-top: 15px;
+
+      padding: 15px;
+
+      background: #f4f7fc;
+
+      border-radius: 8px;
+
+      display: flex;
+      justify-content: space-between;
+
+      font-size: 20px;
+
+      font-weight: 700;
+
+      color: #1e3c5c;
+    }
+
+
+    .receipt-footer {
+      text-align: center;
+
+      padding: 15px 20px;
+
+      border-top: 1px dashed #999;
+
+      color: #777;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================================================
+       RECEIPT BUTTONS
+    ========================================================= */
+
+    .receipt-actions {
+      display: flex;
+      gap: 10px;
+
+      padding: 15px 20px 20px;
+    }
+
+    .receipt-actions button {
+      flex: 1;
+    }
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast-container {
+      position: fixed;
+
+      bottom: 20px;
+      right: 20px;
+
+      z-index: 11000;
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 576px) {
+
+      .main-content {
+        padding: 10px;
+      }
+
+      .topbar {
+        padding: 12px 15px;
+      }
+
+      .topbar h4 {
+        font-size: 1rem;
+      }
+
+      .topbar .user {
+        font-size: 0.85rem;
+      }
+
+      .welcome-marquee marquee {
+        font-size: 15px;
+      }
+
+      .receipt-popup {
+        max-height: 95vh;
+      }
+
+    }
+
+
+    /* =========================================================
+       PRINT RECEIPT
+    ========================================================= */
+
+    @media print {
+
+      body * {
+        visibility: hidden !important;
+      }
+
+      #receiptPrintArea,
+      #receiptPrintArea * {
+        visibility: visible !important;
+      }
+
+      #receiptPrintArea {
+        position: absolute;
+
+        left: 0;
+        top: 0;
+
+        width: 100%;
+
+        background: white;
+      }
+
+      .receipt-actions {
+        display: none !important;
+      }
+
+      .receipt-overlay {
+        position: static;
+        display: block !important;
+
+        background: white;
+        padding: 0;
+      }
+
+      .receipt-popup {
+        max-width: 100%;
+        max-height: none;
+
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+    }
+
+  
+
+
+/* =========================================================
+   UNIFIED AA JINO EV APP
+========================================================= */
+.app-navigation {
+    display: flex;
+    gap: 10px;
+    padding: 12px 24px;
+    background: #ffffff;
+    border-bottom: 1px solid #e8eeeb;
+    position: sticky;
+    top: 65px;
+    z-index: 900;
+}
+.app-nav-btn {
+    border: 1px solid #dce8e2;
+    background: #f7faf8;
+    color: #064e3b;
+    border-radius: 9px;
+    padding: 9px 15px;
+    font-weight: 600;
+    font-size: 13px;
+}
+.app-nav-btn.active,
+.app-nav-btn:hover {
+    background: #087f5b;
+    color: #fff;
+    border-color: #087f5b;
+}
+.app-section { display: none; }
+.app-section.active-section { display: block; }
+#chargingPage.main-content {
+    min-height: calc(100vh - 120px);
+}
+.charging-payment-banner {
+    background: #fff;
+    border: 1px solid #dfeee7;
+    border-left: 4px solid #087f5b;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+.charging-payment-banner strong { color: #064e3b; }
+.charging-payment-banner .small { color: #6b7280; margin-top: 3px; }
+.status-pending {
+    background: #fff3cd !important;
+    color: #856404 !important;
+}
+.port-buttons .btn:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+@media (max-width: 650px) {
+    .app-navigation { padding: 10px 14px; top: 65px; }
+    .app-nav-btn { flex: 1; padding: 8px 9px; }
+    .charging-payment-banner { flex-direction: column; align-items: stretch; }
+}
+
+</style>
+</head>
+<body>
+<!-- =====================================================
+     AUTHENTICATION PAGE
+===================================================== -->
+
+<div id="authPage">
+
+    <div class="auth-card">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            <i class="fa-solid fa-bolt"></i>
+        </div>
+
+        <h2>AA Jino EV</h2>
+
+        <p class="auth-subtitle">
+            Charging Station Wallet
+        </p>
+
+
+        <!-- =================================================
+             LOGIN SECTION
+        ================================================= -->
+
+        <div id="loginSection">
+
+            <h4>Welcome Back</h4>
+
+            <p class="section-description">
+                Login to your AA Jino EV wallet
+            </p>
+
+
+            <div
+                id="loginError"
+                class="alert alert-danger"
+                style="display:none;"
+            >
+                Invalid username or password.
+            </div>
+
+
+            <form id="loginForm">
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="loginUsername">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="loginUsername"
+                        placeholder="Enter username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    class="main-btn"
+                    type="submit"
+                >
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    Login
+
+                </button>
+
+            </form>
+
+
+            <!-- REGISTER LINK -->
+
+            <div class="register-link">
+
+                Don't have an account?
+
+                <button
+                    type="button"
+                    onclick="showRegister()"
+                >
+                    Create Account
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             REGISTER SECTION
+        ================================================= -->
+
+        <div
+            id="registerSection"
+            style="display:none;"
+        >
+
+            <h4>Create Account</h4>
+
+            <p class="section-description">
+                Create your AA Jino EV wallet account
+            </p>
+
+
+            <div
+                id="registerError"
+                class="alert alert-danger"
+                style="display:none;"
+            >
+            </div>
+
+
+            <form id="registerForm">
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label for="registerFullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="registerFullName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DATE OF BIRTH -->
+
+                <div class="form-group">
+
+                    <label for="registerDOB">
+                        Date of Birth
+                    </label>
+
+                    <input
+                        type="date"
+                        id="registerDOB"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE NUMBER -->
+
+                <div class="form-group">
+
+                    <label for="registerPhone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="registerPhone"
+                        placeholder="e.g. 08012345678"
+                        maxlength="15"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- VEHICLE TYPE -->
+
+                <div class="form-group">
+
+                    <label for="registerVehicle">
+                        Vehicle Type
+                    </label>
+
+                    <select
+                        id="registerVehicle"
+                        required
+                    >
+
+                        <option value="">
+                            Select vehicle type
+                        </option>
+
+                        <option value="Electric Car">
+                            Electric Car
+                        </option>
+
+                        <option value="Electric Bike">
+                            Electric Bike
+                        </option>
+
+                        <option value="Electric Bus">
+                            Electric Bus
+                        </option>
+
+                        <option value="Electric Van">
+                            Electric Van
+                        </option>
+
+                        <option value="Electric Truck">
+                            Electric Truck
+                        </option>
+
+                        <option value="Electric Tricycle">
+                            Electric Tricycle
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="registerUsername">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="registerUsername"
+                        placeholder="Create username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="registerPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Create password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- REGISTER BUTTON -->
+
+                <button
+                    class="main-btn"
+                    type="submit"
+                >
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Create Account
+
+                </button>
+
+            </form>
+
+
+            <!-- LOGIN LINK -->
+
+            <div class="register-link">
+
+                Already have an account?
+
+                <button
+                    type="button"
+                    onclick="showLogin()"
+                >
+                    Login
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     WALLET PAGE
+===================================================== -->
+
+<div
+    id="walletPage"
+    class="app-section active-section"
+    style="display:none;"
+>
+
+
+    <!-- =================================================
+         NAVBAR
+    ================================================= -->
+
+    <header class="navbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+
+                <i class="fa-solid fa-bolt"></i>
+
+            </div>
+
+            <span>
+                AA Jino EV
+            </span>
+
+        </div>
+
+
+        <div class="account">
+
+            <div class="account-info">
+
+                <strong id="walletUsername">
+                    jino
+                </strong>
+
+                <small>
+                    Wallet Account
+                </small>
+
+            </div>
+
+
+            <div
+                class="avatar"
+                id="avatar"
+            >
+                J
+            </div>
+
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+                title="Logout"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <div class="app-navigation">
+        <button class="app-nav-btn active" data-section="wallet" onclick="showSection('wallet')">
+            <i class="fa-solid fa-wallet"></i> My Wallet
+        </button>
+        <button class="app-nav-btn" data-section="charging" onclick="showSection('charging')">
+            <i class="fa-solid fa-charging-station"></i> Charging Station
+        </button>
+    </div>
+
+
+
+    <!-- =================================================
+         WALLET CONTENT
+    ================================================= -->
+
+    <main class="wallet-container">
+
+
+        <!-- PAGE TITLE -->
+
+        <div class="page-title">
+
+            <h2>
+                My Wallet
+            </h2>
+
+            <p>
+                Manage your AA Jino EV charging wallet.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             BALANCE CARD
+        ================================================= -->
+
+        <section class="balance-card">
+
+            <div class="balance-content">
+
+                <span class="balance-label">
+                    AVAILABLE BALANCE
+                </span>
+
+
+                <h1 id="walletBalance">
+                    ₦0.00
+                </h1>
+
+
+                <div class="balance-actions">
+
+                    <!-- ADD FUNDS -->
+
+                    <button
+                        class="white-btn"
+                        onclick="comingSoon()"
+                    >
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        Add Fund Account
+
+                    </button>
+
+
+                    <!-- PAY AA JINO -->
+
+                    <button
+                        class="outline-btn"
+                        onclick="openPayment()"
+                    >
+
+                        <i class="fa-solid fa-bolt"></i>
+
+                        Pay AA Jino EV
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================= -->
+
+        <div class="stats-grid">
+
+
+            <!-- TOTAL ADDED -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                </div>
+
+                <span>
+                    Total Added
+                </span>
+
+                <strong id="totalAdded">
+                    ₦0.00
+                </strong>
+
+            </div>
+
+
+            <!-- TOTAL PAID -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                </div>
+
+                <span>
+                    Total Paid
+                </span>
+
+                <strong id="totalSpent">
+                    ₦0.00
+                </strong>
+
+            </div>
+
+
+            <!-- TRANSACTIONS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-receipt"></i>
+
+                </div>
+
+                <span>
+                    Transactions
+                </span>
+
+                <strong id="transactionCount">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ACCOUNT INFORMATION
+        ================================================= -->
+
+        <div class="payment-notice">
+
+            <div class="notice-icon">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    Account Information
+                </strong>
+
+                <p>
+                    <span id="profileFullName">
+                        -
+                    </span>
+                    &nbsp;•&nbsp;
+
+                    <span id="profilePhone">
+                        -
+                    </span>
+                    &nbsp;•&nbsp;
+
+                    <span id="profileVehicle">
+                        -
+                    </span>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             AA JINO EV PAYMENT NOTICE
+        ================================================= -->
+
+        <div class="payment-notice">
+
+            <div class="notice-icon">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    AA Jino EV Only
+                </strong>
+
+                <p>
+                    Your wallet can only be used to pay
+                    for services at AA Jino EV Charging Station.
+                    It cannot be used to transfer money to
+                    another bank or wallet.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TRANSACTIONS
+        ================================================= -->
+
+        <section class="transactions-card">
+
+            <div class="transactions-header">
+
+                <h4>
+                    Transaction History
+                </h4>
+
+
+                <input
+                    type="search"
+                    id="searchTransaction"
+                    placeholder="Search transaction..."
+                    oninput="renderTransactions()"
+                >
+
+            </div>
+
+
+            <div id="transactionList">
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<main id="chargingPage" class="main-content app-section">
+
+
+    <!-- =======================================================
+         TOP BAR
+    ======================================================== -->
+
+    <div class="topbar">
+
+      <h4>
+        <i class="fas fa-charging-station me-2 text-success"></i>
+        Dashboard
+      </h4>
+
+      <span class="user">
+
+        <i class="fas fa-user-circle me-1"></i>
+
+        <span id="operatorName">
+          Jino
+        </span>
+
+      </span>
+
+    </div>
+
+
+    <!-- =======================================================
+         CHARGING PORTS
+    ======================================================== -->
+
+    
+      <div class="charging-payment-banner">
+        <div>
+          <strong><i class="fas fa-wallet me-2"></i>Pay directly from your wallet</strong>
+          <div class="small">Stop charging to calculate the amount, then pay the exact charge from your AA Jino EV wallet.</div>
+        </div>
+        <button class="btn btn-outline-success btn-sm" onclick="showSection('wallet')">
+          <i class="fas fa-wallet me-1"></i> View Wallet
+        </button>
+      </div>
+
+    <div
+      class="row g-4"
+      id="portsContainer">
+
+      <!-- Ports generated by JavaScript -->
+
+    </div>
+
+
+    <!-- =======================================================
+         FOOTER
+    ======================================================== -->
+
+    <footer class="dashboard-footer">
+
+      <div class="welcome-marquee">
+
+        <marquee
+          behavior="scroll"
+          direction="left"
+          scrollamount="6">
+
+        <h1 style="font-size:150px"> Welcome to AA Jino EV Charging Station</h1>
+
+        </marquee>
+
+      </div>
+
+
+      <div>
+        © 2026 AA Jino EV Charging Station.
+        All Rights Reserved.
+      </div>
+
+    </footer>
+
+
+  </main>
+
+<div
+    class="receipt-overlay"
+    id="receiptOverlay"
+    onclick="closeReceiptOutside(event)">
+
+    <div
+      class="receipt-popup"
+      id="receiptPrintArea">
+
+
+      <!-- RECEIPT HEADER -->
+
+      <div class="receipt-header">
+
+        <i class="fas fa-charging-station"></i>
+
+        <h3>
+          AA Jino EV
+        </h3>
+
+        <p>
+          EV Charging Station
+        </p>
+
+        <p>
+          Charging Receipt
+        </p>
+
+      </div>
+
+
+      <!-- RECEIPT INFORMATION -->
+
+      <div
+        class="receipt-body"
+        id="receiptContent">
+
+        <!-- Receipt information generated by JavaScript -->
+
+      </div>
+
+
+      <!-- RECEIPT FOOTER -->
+
+      <div class="receipt-footer">
+
+        Thank you for using
+        AA Jino EV Charging Station.
+
+        <br />
+
+        Welcome to AA Jino EV Charging Station
+
+      </div>
+
+
+      <!-- RECEIPT ACTIONS -->
+
+      <div class="receipt-actions">
+
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="printCurrentReceipt()">
+
+          <i class="fas fa-print me-1"></i>
+
+          Print Receipt
+
+        </button>
+
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="closeReceipt()">
+
+          <i class="fas fa-times me-1"></i>
+
+          Close
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+<div class="toast-container"></div>
+
+
+<!-- =====================================================
+     AA JINO EV PAYMENT MODAL
+===================================================== -->
+
+<div
+    class="modal fade"
+    id="paymentModal"
+    tabindex="-1"
+>
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                    Pay AA Jino EV
+
+                </h5>
+
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+
+                <!-- FIXED PAYMENT DESTINATION -->
+
+                <div class="station-box">
+
+                    <i class="fa-solid fa-charging-station"></i>
+
+                    <div>
+
+                        <strong>
+                            AA Jino EV Charging Station
+                        </strong>
+
+                        <small>
+                            Payment destination
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <label for="paymentAmount">
+                    Amount to Pay
+                </label>
+
+
+                <div class="amount-input">
+
+                    <span>
+                        ₦
+                    </span>
+
+                    <input
+                        type="number"
+                        id="paymentAmount"
+                        placeholder="Enter amount"
+                        min="1"
+                    >
+
+                </div>
+
+
+                <div
+                    id="paymentError"
+                    class="alert alert-danger"
+                    style="display:none;"
+                >
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    class="btn btn-success"
+                    onclick="payAAJino()"
+                >
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                    Pay AA Jino EV
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
+
+let currentUser = "";
+
+let wallet = {};
+
+
+/* =====================================================
+   STORAGE KEYS
+===================================================== */
+
+function userKey(username) {
+
+    return "AA_JINO_EV_USER_" +
+           username.toLowerCase();
+
+}
+
+
+function walletKey(username) {
+
+    return "AA_JINO_EV_WALLET_" +
+           username.toLowerCase();
+
+}
+
+
+/* =====================================================
+   DEFAULT JINO ACCOUNT
+===================================================== */
+
+function createDefaultJino() {
+
+    const accountKey =
+        userKey("jino");
+
+
+    /*
+       Create jino account if it doesn't exist.
+    */
+
+    if (!localStorage.getItem(accountKey)) {
+
+        localStorage.setItem(
+
+            accountKey,
+
+            JSON.stringify({
+
+                username: "jino",
+
+                password: "jino",
+
+                fullName: "AA Jino",
+
+                dob: "",
+
+                phone: "",
+
+                vehicleType: "Electric Car"
+
+            })
+
+        );
+
+    }
+
+
+    /*
+       Create jino wallet with ₦5,000
+       if it doesn't exist.
+    */
+
+    const walletStorage =
+        walletKey("jino");
+
+
+    if (!localStorage.getItem(walletStorage)) {
+
+        localStorage.setItem(
+
+            walletStorage,
+
+            JSON.stringify({
+
+                balance: 5000,
+
+                totalAdded: 0,
+
+                totalSpent: 0,
+
+                transactions: [
+
+                    {
+
+                        type: "deposit",
+
+                        title: "Initial Wallet Balance",
+
+                        amount: 5000,
+
+                        date:
+                            new Date()
+                            .toLocaleString()
+
+                    }
+
+                ]
+
+            })
+
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+createDefaultJino();
+
+
+/* =====================================================
+   SHOW LOGIN
+===================================================== */
+
+function showLogin() {
+
+    document.getElementById("loginSection")
+        .style.display = "block";
+
+
+    document.getElementById("registerSection")
+        .style.display = "none";
+
+
+    document.getElementById("registerError")
+        .style.display = "none";
+
+}
+
+
+/* =====================================================
+   SHOW REGISTER
+===================================================== */
+
+function showRegister() {
+
+    document.getElementById("loginSection")
+        .style.display = "none";
+
+
+    document.getElementById("registerSection")
+        .style.display = "block";
+
+
+    document.getElementById("loginError")
+        .style.display = "none";
+
+}
+
+
+/* =====================================================
+   REGISTER USER
+===================================================== */
+
+document
+    .getElementById("registerForm")
+    .addEventListener(
+        "submit",
+        function(e) {
+
+            e.preventDefault();
+
+
+            /* GET VALUES */
+
+            const fullName =
+                document
+                    .getElementById(
+                        "registerFullName"
+                    )
+                    .value
+                    .trim();
+
+
+            const dob =
+                document
+                    .getElementById(
+                        "registerDOB"
+                    )
+                    .value;
+
+
+            const phone =
+                document
+                    .getElementById(
+                        "registerPhone"
+                    )
+                    .value
+                    .trim();
+
+
+            const vehicle =
+                document
+                    .getElementById(
+                        "registerVehicle"
+                    )
+                    .value;
+
+
+            const username =
+                document
+                    .getElementById(
+                        "registerUsername"
+                    )
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            const password =
+                document
+                    .getElementById(
+                        "registerPassword"
+                    )
+                    .value;
+
+
+            const confirm =
+                document
+                    .getElementById(
+                        "confirmPassword"
+                    )
+                    .value;
+
+
+            const error =
+                document.getElementById(
+                    "registerError"
+                );
+
+
+            error.style.display = "none";
+
+
+            /* VALIDATE FULL NAME */
+
+            if (fullName.length < 3) {
+
+                showRegisterError(
+                    "Please enter your full name."
+                );
+
+                return;
+
+            }
+
+
+            /* VALIDATE DOB */
+
+            if (!dob) {
+
+                showRegisterError(
+                    "Please select your date of birth."
+                );
+
+                return;
+
+            }
+
+
+            /* VALIDATE PHONE */
+
+            if (phone.length < 7) {
+
+                showRegisterError(
+                    "Please enter a valid phone number."
+                );
+
+                return;
+
+            }
+
+
+            /* VALIDATE VEHICLE */
+
+            if (!vehicle) {
+
+                showRegisterError(
+                    "Please select your vehicle type."
+                );
+
+                return;
+
+            }
+
+
+            /* VALIDATE USERNAME */
+
+            if (username.length < 3) {
+
+                showRegisterError(
+                    "Username must contain at least 3 characters."
+                );
+
+                return;
+
+            }
+
+
+            /* JINO IS RESERVED */
+
+            if (username === "jino") {
+
+                showRegisterError(
+                    "The username jino is reserved."
+                );
+
+                return;
+
+            }
+
+
+            /* VALIDATE PASSWORD */
+
+            if (password.length < 3) {
+
+                showRegisterError(
+                    "Password must contain at least 3 characters."
+                );
+
+                return;
+
+            }
+
+
+            /* CONFIRM PASSWORD */
+
+            if (password !== confirm) {
+
+                showRegisterError(
+                    "Passwords do not match."
+                );
+
+                return;
+
+            }
+
+
+            /* CHECK EXISTING ACCOUNT */
+
+            if (
+                localStorage.getItem(
+                    userKey(username)
+                )
+            ) {
+
+                showRegisterError(
+                    "This username already exists."
+                );
+
+                return;
+
+            }
+
+
+            /* =================================================
+               SAVE ACCOUNT
+            ================================================= */
+
+            const account = {
+
+                username: username,
+
+                password: password,
+
+                fullName: fullName,
+
+                dob: dob,
+
+                phone: phone,
+
+                vehicleType: vehicle
+
+            };
+
+
+            localStorage.setItem(
+
+                userKey(username),
+
+                JSON.stringify(account)
+
+            );
+
+
+            /* =================================================
+               CREATE ZERO-BALANCE WALLET
+            ================================================= */
+
+            const newWallet = {
+
+                balance: 0,
+
+                totalAdded: 0,
+
+                totalSpent: 0,
+
+                transactions: []
+
+            };
+
+
+            localStorage.setItem(
+
+                walletKey(username),
+
+                JSON.stringify(newWallet)
+
+            );
+
+
+            /* SUCCESS */
+
+            alert(
+                "Account created successfully. Your wallet balance is ₦0.00."
+            );
+
+
+            /* RESET FORM */
+
+            document
+                .getElementById(
+                    "registerForm"
+                )
+                .reset();
+
+
+            /* PUT USERNAME IN LOGIN */
+
+            document
+                .getElementById(
+                    "loginUsername"
+                )
+                .value = username;
+
+
+            /* SHOW LOGIN */
+
+            showLogin();
+
+        }
+    );
+
+
+/* =====================================================
+   REGISTER ERROR
+===================================================== */
+
+function showRegisterError(message) {
+
+    const error =
+        document.getElementById(
+            "registerError"
+        );
+
+
+    error.textContent = message;
+
+    error.style.display = "block";
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+document
+    .getElementById("loginForm")
+    .addEventListener(
+        "submit",
+        function(e) {
+
+            e.preventDefault();
+
+
+            const username =
+                document
+                    .getElementById(
+                        "loginUsername"
+                    )
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            const password =
+                document
+                    .getElementById(
+                        "loginPassword"
+                    )
+                    .value;
+
+
+            const error =
+                document.getElementById(
+                    "loginError"
+                );
+
+
+            const savedAccount =
+                localStorage.getItem(
+                    userKey(username)
+                );
+
+
+            if (!savedAccount) {
+
+                error.textContent =
+                    "Account not found. Please create an account first.";
+
+                error.style.display = "block";
+
+                return;
+
+            }
+
+
+            const account =
+                JSON.parse(savedAccount);
+
+
+            if (
+                account.password !==
+                password
+            ) {
+
+                error.textContent =
+                    "Incorrect password.";
+
+                error.style.display = "block";
+
+                return;
+
+            }
+
+
+            error.style.display = "none";
+
+
+            loginSuccess(
+                username,
+                account
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   LOGIN SUCCESS
+===================================================== */
+
+function loginSuccess(
+    username,
+    account
+) {
+    currentUser = username;
+
+    const savedWallet = localStorage.getItem(walletKey(username));
+
+    if (savedWallet) {
+        wallet = JSON.parse(savedWallet);
+    } else {
+        wallet = {
+            balance: 0,
+            totalAdded: 0,
+            totalSpent: 0,
+            transactions: []
+        };
+        saveWallet();
+    }
+
+    sessionStorage.setItem("AA_JINO_LOGGED_IN", "true");
+    sessionStorage.setItem("AA_JINO_CURRENT_USER", username);
+
+    document.getElementById("authPage").style.display = "none";
+    document.getElementById("walletPage").style.display = "block";
+    document.getElementById("walletUsername").textContent = username;
+    document.getElementById("operatorName").textContent = username;
+    document.getElementById("avatar").textContent =
+        username.charAt(0).toUpperCase();
+
+    document.getElementById("profileFullName").textContent =
+        account.fullName || "-";
+    document.getElementById("profilePhone").textContent =
+        account.phone || "-";
+    document.getElementById("profileVehicle").textContent =
+        account.vehicleType || "-";
+
+    updateWallet();
+    initChargingPorts();
+    renderPorts();
+    showSection("wallet");
+}
+
+/* =====================================================
+   UPDATE WALLET
+===================================================== */
+
+function updateWallet() {
+
+    document.getElementById(
+        "walletBalance"
+    ).textContent =
+        money(wallet.balance);
+
+
+    document.getElementById(
+        "totalAdded"
+    ).textContent =
+        money(wallet.totalAdded);
+
+
+    document.getElementById(
+        "totalSpent"
+    ).textContent =
+        money(wallet.totalSpent);
+
+
+    document.getElementById(
+        "transactionCount"
+    ).textContent =
+        wallet.transactions.length;
+
+
+    renderTransactions();
+
+}
+
+
+/* =====================================================
+   SAVE WALLET
+===================================================== */
+
+function saveWallet() {
+
+    localStorage.setItem(
+
+        walletKey(currentUser),
+
+        JSON.stringify(wallet)
+
+    );
+
+}
+
+
+/* =====================================================
+   MONEY FORMAT
+===================================================== */
+
+function money(amount) {
+
+    return "₦" +
+        Number(amount).toLocaleString(
+            "en-NG",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+}
+
+
+/* =====================================================
+   ADD FUND ACCOUNT
+===================================================== */
+
+function comingSoon() {
+
+    alert(
+        "Add Fund Account is coming soon."
+    );
+
+}
+
+
+/* =====================================================
+   OPEN AA JINO PAYMENT
+===================================================== */
+
+function openPayment() {
+
+    document.getElementById(
+        "paymentAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "paymentError"
+    ).style.display = "none";
+
+
+    const modal =
+        new bootstrap.Modal(
+            document.getElementById(
+                "paymentModal"
+            )
+        );
+
+
+    modal.show();
+
+}
+
+
+/* =====================================================
+   PAY AA JINO EV
+===================================================== */
+
+function payAAJino() {
+
+    const amount =
+        Number(
+            document.getElementById(
+                "paymentAmount"
+            ).value
+        );
+
+
+    const error =
+        document.getElementById(
+            "paymentError"
+        );
+
+
+    error.style.display = "none";
+
+
+    /* VALIDATE AMOUNT */
+
+    if (!amount || amount <= 0) {
+
+        error.textContent =
+            "Enter a valid payment amount.";
+
+        error.style.display = "block";
+
+        return;
+
+    }
+
+
+    /* CHECK BALANCE */
+
+    if (amount > wallet.balance) {
+
+        error.textContent =
+            "Insufficient wallet balance.";
+
+        error.style.display = "block";
+
+        return;
+
+    }
+
+
+    /*
+       PAYMENT DESTINATION IS FIXED.
+
+       This wallet can only pay
+       AA Jino EV Charging Station.
+    */
+
+
+    wallet.balance -= amount;
+
+    wallet.totalSpent += amount;
+
+
+    wallet.transactions.unshift({
+
+        type: "payment",
+
+        title: "Payment to AA Jino EV",
+
+        amount: amount,
+
+        date:
+            new Date()
+            .toLocaleString()
+
+    });
+
+
+    saveWallet();
+
+    updateWallet();
+
+
+    /* CLOSE MODAL */
+
+    const modal =
+        bootstrap.Modal.getInstance(
+            document.getElementById(
+                "paymentModal"
+            )
+        );
+
+
+    modal.hide();
+
+
+    alert(
+        money(amount) +
+        " paid successfully to AA Jino EV Charging Station."
+    );
+
+}
+
+
+/* =====================================================
+   TRANSACTION HISTORY
+===================================================== */
+
+function renderTransactions() {
+
+    const container =
+        document.getElementById(
+            "transactionList"
+        );
+
+
+    const search =
+        document.getElementById(
+            "searchTransaction"
+        )
+        .value
+        .toLowerCase();
+
+
+    const transactions =
+        wallet.transactions.filter(
+            transaction =>
+                transaction.title
+                    .toLowerCase()
+                    .includes(search)
+        );
+
+
+    if (
+        transactions.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-receipt"></i>
+
+                <p>
+                    No transactions found.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    transactions.forEach(
+        transaction => {
+
+            const payment =
+                transaction.type === "payment";
+
+
+            container.innerHTML += `
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="
+                            transaction-icon
+                            ${
+                                payment
+                                    ? "payment-icon"
+                                    : "deposit-icon"
+                            }
+                        ">
+
+                            <i class="
+                                fa-solid
+                                ${
+                                    payment
+                                        ? "fa-bolt"
+                                        : "fa-arrow-down"
+                                }
+                            "></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                ${transaction.title}
+                            </strong>
+
+                            <small>
+                                ${transaction.date}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="
+                        ${
+                            payment
+                                ? "negative"
+                                : "positive"
+                        }
+                    ">
+
+                        ${
+                            payment
+                                ? "-"
+                                : "+"
+                        }
+
+                        ${money(transaction.amount)}
+
+                        <span>
+                            Successful
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   SECTION NAVIGATION
+===================================================== */
+function showSection(section) {
+    const walletPage = document.getElementById("walletPage");
+    const chargingPage = document.getElementById("chargingPage");
+
+    if (section === "charging") {
+        walletPage.style.display = "none";
+        chargingPage.classList.add("active-section");
+    } else {
+        chargingPage.classList.remove("active-section");
+        walletPage.style.display = "block";
+    }
+
+    document.querySelectorAll(".app-nav-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.section === section);
+    });
+
+    if (section === "wallet") {
+        updateWallet();
+    }
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout() {
+    currentUser = "";
+    wallet = {};
+    sessionStorage.removeItem("AA_JINO_LOGGED_IN");
+    sessionStorage.removeItem("AA_JINO_CURRENT_USER");
+
+    document.getElementById("walletPage").style.display = "none";
+    const chargingPage = document.getElementById("chargingPage");
+    if (chargingPage) chargingPage.classList.remove("active-section");
+    document.getElementById("authPage").style.display = "flex";
+    document.getElementById("loginForm").reset();
+    showLogin();
+}
+
+
+
+/* =====================================================
+   RESTORE LOGIN SESSION
+===================================================== */
+document.addEventListener("DOMContentLoaded", function () {
+    const logged = sessionStorage.getItem("AA_JINO_LOGGED_IN");
+    const username = sessionStorage.getItem("AA_JINO_CURRENT_USER");
+
+    if (logged === "true" && username) {
+        const savedAccount = localStorage.getItem(userKey(username));
+        if (savedAccount) {
+            loginSuccess(username, JSON.parse(savedAccount));
+        }
+    }
+});
+
+
+
+/* =========================================================
+   CHARGING STATION + WALLET PAYMENT INTEGRATION
+========================================================= */
+
+const PORTS_COUNT = 8;
+const RATE_KW = 7.2;
+const PRICE_PER_KWH = 150;
+
+let ports = [];
+let currentReceipt = null;
+let pendingChargingPort = null;
+
+function formatTime(sec) {
+    const h = String(Math.floor(sec / 3600)).padStart(2, "0");
+    const m = String(Math.floor((sec % 3600) / 60)).padStart(2, "0");
+    const s = String(Math.floor(sec % 60)).padStart(2, "0");
+    return `${h}:${m}:${s}`;
+}
+
+function formatDate(date) {
+    if (!date) return "-";
+    return new Date(date).toLocaleString("en-NG", {
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    });
+}
+
+function generateReceipt() {
+    return "RCP-" + Date.now().toString().slice(-8) + "-" +
+        Math.floor(Math.random() * 1000);
+}
+
+function initChargingPorts() {
+    if (ports.length) return;
+    for (let i = 1; i <= PORTS_COUNT; i++) {
+        ports[i] = {
+            id: i,
+            status: "Available",
+            timer: 0,
+            energy: 0,
+            amount: 0,
+            interval: null,
+            running: false,
+            startTime: null,
+            stopTime: null,
+            receipt: null
+        };
+    }
+}
+
+function renderPorts() {
+    const container = document.getElementById("portsContainer");
+    if (!container) return;
+    container.innerHTML = "";
+
+    for (let i = 1; i <= PORTS_COUNT; i++) {
+        const p = ports[i];
+        const statusClass =
+            p.status === "Available" ? "status-available" :
+            p.status === "Charging" ? "status-charging" :
+            p.status === "Payment Pending" ? "status-pending" :
+            "status-completed";
+
+        const card = document.createElement("div");
+        card.className = "col-xl-3 col-lg-4 col-md-6";
+        card.innerHTML = `
+            <div class="card card-station">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span><i class="fas fa-plug me-2 text-success"></i>Port ${i}</span>
+                    <span class="status-badge ${statusClass}" id="statusBadge_${i}">${p.status}</span>
+                </div>
+                <div class="card-body">
+                    <div class="timer-display text-center mb-2" id="timer_${i}">${formatTime(p.timer)}</div>
+                    <div class="d-flex justify-content-between gap-2">
+                        <span>Energy: <strong id="energy_${i}">${p.energy.toFixed(3)}</strong> kWh</span>
+                        <span>Amount: <strong id="amount_${i}">₦${p.amount.toFixed(2)}</strong></span>
+                    </div>
+                    <div class="port-buttons mt-3 d-flex flex-wrap gap-1">
+                        <button class="btn btn-success btn-sm" id="startBtn_${i}" onclick="startCharging(${i})">
+                            <i class="fas fa-play"></i> Start
+                        </button>
+                        <button class="btn btn-warning btn-sm" id="stopBtn_${i}" onclick="stopCharging(${i})" disabled>
+                            <i class="fas fa-stop"></i> Stop
+                        </button>
+                        <button class="btn btn-info btn-sm text-white" id="payBtn_${i}" onclick="payForCharging(${i})" disabled>
+                            <i class="fas fa-wallet"></i> Pay
+                        </button>
+                        <button class="btn btn-info btn-sm text-white" id="printBtn_${i}" onclick="printReceipt(${i})" disabled>
+                            <i class="fas fa-receipt"></i> Print
+                        </button>
+                        <button class="btn btn-secondary btn-sm" id="resetBtn_${i}" onclick="resetPort(${i})">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>`;
+        container.appendChild(card);
+    }
+    for (let i = 1; i <= PORTS_COUNT; i++) updatePortUI(i);
+}
+
+function updatePortUI(i) {
+    const p = ports[i];
+    const badge = document.getElementById(`statusBadge_${i}`);
+    if (!badge) return;
+
+    const statusClass =
+        p.status === "Available" ? "status-available" :
+        p.status === "Charging" ? "status-charging" :
+        p.status === "Payment Pending" ? "status-pending" :
+        "status-completed";
+
+    badge.textContent = p.status;
+    badge.className = "status-badge " + statusClass;
+    document.getElementById(`timer_${i}`).textContent = formatTime(p.timer);
+    document.getElementById(`energy_${i}`).textContent = p.energy.toFixed(3);
+    document.getElementById(`amount_${i}`).textContent = `₦${p.amount.toFixed(2)}`;
+
+    document.getElementById(`startBtn_${i}`).disabled = p.status !== "Available";
+    document.getElementById(`stopBtn_${i}`).disabled = p.status !== "Charging";
+    document.getElementById(`payBtn_${i}`).disabled = p.status !== "Payment Pending";
+    document.getElementById(`printBtn_${i}`).disabled = p.status !== "Completed";
+    document.getElementById(`resetBtn_${i}`).disabled =
+        p.status === "Charging" || p.status === "Payment Pending";
+}
+
+function startCharging(i) {
+    const p = ports[i];
+    if (!currentUser) {
+        alert("Please login first.");
+        return;
+    }
+    if (p.status !== "Available") return;
+
+    p.status = "Charging";
+    p.running = true;
+    p.startTime = new Date();
+    p.stopTime = null;
+    p.receipt = null;
+
+    p.interval = setInterval(() => {
+        p.timer += 1;
+        p.energy += RATE_KW / 3600;
+        p.amount = p.energy * PRICE_PER_KWH;
+        updatePortUI(i);
+    }, 1000);
+
+    updatePortUI(i);
+    showToast(`Port ${i} charging started.`);
+}
+
+function stopCharging(i) {
+    const p = ports[i];
+    if (!p.running) return;
+
+    clearInterval(p.interval);
+    p.interval = null;
+    p.running = false;
+    p.stopTime = new Date();
+    p.status = "Payment Pending";
+
+    p.receipt = {
+        receiptNo: generateReceipt(),
+        port: i,
+        startTime: p.startTime,
+        stopTime: p.stopTime,
+        duration: p.timer,
+        energy: p.energy,
+        amount: p.amount,
+        pricePerKwh: PRICE_PER_KWH,
+        operator: currentUser || "Jino",
+        status: "Payment Pending",
+        paid: false
+    };
+
+    updatePortUI(i);
+    showToast(`Port ${i} stopped. Payment of ${money(p.amount)} is required.`);
+    openChargingPayment(i);
+}
+
+function openChargingPayment(i) {
+    pendingChargingPort = i;
+    const p = ports[i];
+
+    document.getElementById("paymentAmount").value = p.amount.toFixed(2);
+    document.getElementById("paymentAmount").readOnly = true;
+    document.getElementById("paymentError").style.display = "none";
+
+    const modal = new bootstrap.Modal(document.getElementById("paymentModal"));
+    modal.show();
+}
+
+function payForCharging(i) {
+    openChargingPayment(i);
+}
+
+function payAAJino() {
+    const amount = Number(document.getElementById("paymentAmount").value);
+    const error = document.getElementById("paymentError");
+    error.style.display = "none";
+
+    if (pendingChargingPort) {
+        const i = pendingChargingPort;
+        const p = ports[i];
+
+        if (p.status !== "Payment Pending" || !p.receipt) {
+            error.textContent = "This charging session is not awaiting payment.";
+            error.style.display = "block";
+            return;
+        }
+
+        if (wallet.balance < amount) {
+            error.textContent =
+                `Insufficient wallet balance. Required ${money(amount)}, available ${money(wallet.balance)}.`;
+            error.style.display = "block";
+            return;
+        }
+
+        wallet.balance -= amount;
+        wallet.totalSpent += amount;
+
+        wallet.transactions.unshift({
+            type: "payment",
+            title: `Charging payment - Port ${i}`,
+            amount: amount,
+            date: new Date().toLocaleString(),
+            receiptNo: p.receipt.receiptNo,
+            port: i,
+            energy: p.energy,
+            duration: p.timer,
+            destination: "AA Jino EV Charging Station",
+            status: "Paid"
+        });
+
+        p.receipt.amount = amount;
+        p.receipt.status = "Paid";
+        p.receipt.paid = true;
+        p.status = "Completed";
+
+        saveWallet();
+        updateWallet();
+        updatePortUI(i);
+
+        pendingChargingPort = null;
+        document.getElementById("paymentAmount").readOnly = false;
+
+        const modal = bootstrap.Modal.getInstance(document.getElementById("paymentModal"));
+        if (modal) modal.hide();
+
+        showToast(`${money(amount)} paid successfully from your wallet.`);
+        printReceipt(i);
+        return;
+    }
+
+    /* Manual AA Jino payment retained from the original wallet template. */
+    if (!amount || amount <= 0) {
+        error.textContent = "Enter a valid payment amount.";
+        error.style.display = "block";
+        return;
+    }
+
+    if (amount > wallet.balance) {
+        error.textContent = "Insufficient wallet balance.";
+        error.style.display = "block";
+        return;
+    }
+
+    wallet.balance -= amount;
+    wallet.totalSpent += amount;
+    wallet.transactions.unshift({
+        type: "payment",
+        title: "Payment to AA Jino EV",
+        amount: amount,
+        date: new Date().toLocaleString(),
+        destination: "AA Jino EV Charging Station",
+        status: "Paid"
+    });
+
+    saveWallet();
+    updateWallet();
+
+    const modal = bootstrap.Modal.getInstance(document.getElementById("paymentModal"));
+    if (modal) modal.hide();
+
+    alert(money(amount) + " paid successfully to AA Jino EV Charging Station.");
+}
+
+function resetPort(i) {
+    const p = ports[i];
+    if (p.running) clearInterval(p.interval);
+    if (p.status === "Payment Pending") {
+        showToast("Please pay the charging amount before resetting this port.");
+        return;
+    }
+
+    p.status = "Available";
+    p.timer = 0;
+    p.energy = 0;
+    p.amount = 0;
+    p.interval = null;
+    p.running = false;
+    p.startTime = null;
+    p.stopTime = null;
+    p.receipt = null;
+    updatePortUI(i);
+    showToast(`Port ${i} reset.`);
+}
+
+function printReceipt(i) {
+    const p = ports[i];
+    if (!p.receipt || !p.receipt.paid) {
+        alert("Payment must be completed before printing the receipt.");
+        return;
+    }
+
+    currentReceipt = p.receipt;
+
+    document.getElementById("receiptContent").innerHTML = `
+        <div class="receipt-row"><span class="receipt-label">Receipt No.</span><span class="receipt-value">${p.receipt.receiptNo}</span></div>
+        <div class="receipt-row"><span class="receipt-label">Port</span><span class="receipt-value">Port ${p.receipt.port}</span></div>
+        <div class="receipt-row"><span class="receipt-label">User</span><span class="receipt-value">${p.receipt.operator}</span></div>
+        <div class="receipt-row"><span class="receipt-label">Start Time</span><span class="receipt-value">${formatDate(p.receipt.startTime)}</span></div>
+        <div class="receipt-row"><span class="receipt-label">Stop Time</span><span class="receipt-value">${formatDate(p.receipt.stopTime)}</span></div>
+        <div class="receipt-row"><span class="receipt-label">Charging Duration</span><span class="receipt-value">${formatTime(p.receipt.duration)}</span></div>
+        <div class="receipt-row"><span class="receipt-label">Energy Used</span><span class="receipt-value">${p.receipt.energy.toFixed(3)} kWh</span></div>
+        <div class="receipt-row"><span class="receipt-label">Price / kWh</span><span class="receipt-value">₦${p.receipt.pricePerKwh.toFixed(2)}</span></div>
+        <div class="receipt-row"><span class="receipt-label">Payment Status</span><span class="receipt-value text-success">Paid from Wallet</span></div>
+        <div class="receipt-total"><span>TOTAL</span><span>₦${p.receipt.amount.toFixed(2)}</span></div>
+    `;
+
+    document.getElementById("receiptOverlay").classList.add("show");
+}
+
+function printCurrentReceipt() {
+    if (currentReceipt) window.print();
+}
+
+function closeReceipt() {
+    document.getElementById("receiptOverlay").classList.remove("show");
+    currentReceipt = null;
+}
+
+function closeReceiptOutside(event) {
+    if (event.target.id === "receiptOverlay") closeReceipt();
+}
+
+function showToast(msg) {
+    const container = document.querySelector(".toast-container");
+    const toast = document.createElement("div");
+    toast.className = "toast align-items-center text-white bg-success border-0 show";
+    toast.setAttribute("role", "alert");
+    toast.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body">${msg}</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" onclick="this.closest('.toast').remove()"></button>
+        </div>`;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+}
+
+</script>
+</body>
+</html>
